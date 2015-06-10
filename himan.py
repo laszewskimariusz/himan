@@ -56,44 +56,7 @@ class Database:
 
 
 
+file1 = Database()
 
-
-class Operation(Database):
-
-    def start(self):
-        print("WELCOME IN HIMAN\n CHOSE OPTIONS \n 1.CREATE DATABASE\n 2.CREATE TABLE\n 3.ADD DATA TO TABLE\n 4.QUERY DATA\n\n\n")
-        choice = ""
-        base = Database()
-
-        while choice != "exit":
-            choice = input("Chose number : ")
-            if choice == '1':
-                try:
-                    base.creating_data_base()
-                except:
-                    print("ERROR003")
-
-            elif choice == '2':
-                try:
-                    base.creating_table()
-                except:
-                    print("ERROR003")
-            elif choice == '3':
-                try:
-                    base.insert_data()
-                except:
-                    print("ERROR003")
-            if choice == '4':
-                try:
-                    base.database_query()
-                except:
-                    print("ERROR003")
-
-            else:
-                quit()
-
-
-
-
-run = Operation()
-run.start()
+file1.insert_data()
+file1.database_query()
