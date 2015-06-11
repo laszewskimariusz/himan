@@ -91,5 +91,5 @@ class Operation(Database):
 
 #run = Operation()
 #run.start()
-run = CratingTable()
-run.inputdata()
+#run = CratingTable()
+#run.inputdata()
