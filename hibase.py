@@ -17,8 +17,10 @@ class Database:
         try:
             con = lite.connect(self.file_name)
             cur = con.cursor()
-            cur.execute('''CREATE TABLE stocks
-             (date text, trans text, symbol text, qty real, price real)''')
+            #cur.execute('''CREATE TABLE stocks
+            # (date text, trans text, symbol text, qty real, price real)''')
+            cur.execute('''CREATE TABLE users
+             (name text, password text)''')
 
         finally:
             if con:
@@ -29,7 +31,7 @@ class Database:
         try:
             con = lite.connect(self.file_name)
             cur = con.cursor()
-            cur.execute("INSERT INTO stocks VALUES ('2006-01-05','BUY','RHAT',100,35.14)")
+            cur.execute("INSERT INTO users VALUES ('mariusz','shinigami')")
             con.commit()
 
         finally:
@@ -42,7 +44,7 @@ class Database:
         try:
             con = lite.connect(self.file_name)
             cur = con.cursor()
-            cur.execute('SELECT * FROM stocks')
+            cur.execute('SELECT * FROM users')
             print (cur.fetchone())
 
 
@@ -89,7 +91,7 @@ class Operation(Database):
 
 
 
-#run = Operation()
-#run.start()
+run = Operation()
+run.start()
 #run = CratingTable()
 #run.inputdata()
