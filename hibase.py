@@ -45,9 +45,18 @@ class Database:
             con = lite.connect(self.file_name)
             cur = con.cursor()
             cur.execute('SELECT * FROM users')
-            print (cur.fetchone())
+            print(cur.fetchone())
 
 
+        finally:
+            if con:
+                con.close()
+
+    def admin_logon(self):
+        try:
+            con = lite.connect(self.file_name)
+            cur = con.cursor()
+            cur.execute('SELECT name, password FROM users')
         finally:
             if con:
                 con.close()
