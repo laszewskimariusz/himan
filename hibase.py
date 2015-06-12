@@ -1,10 +1,9 @@
 import sqlite3 as lite
 
 
+
 class Database:
-    file_name = input("Enter Database Name:")
-
-
+#    file_name = input("Enter Database Name:")
 ##### CREATING DATABASE
     def creating_data_base(self):
         if self.file_name is self.file_name:
@@ -46,21 +45,27 @@ class Database:
             cur = con.cursor()
             cur.execute('SELECT * FROM users')
             print(cur.fetchone())
-
-
         finally:
             if con:
                 con.close()
+
+##### ADMIN LOGIN
 
     def admin_logon(self):
+
         try:
-            con = lite.connect(self.file_name)
+            con = lite.connect(r"test") ## na potrzeby testu przypisalem baze na sztywno
             cur = con.cursor()
             cur.execute('SELECT name, password FROM users')
+            data = cur.fetchall()
+            for row in data:
+                cur.close()
         finally:
             if con:
                 con.close()
-
+        usr = row[0]
+        paswd = row[1]
+        #print(row[0])
 
 class Operation(Database):
 #
@@ -100,7 +105,7 @@ class Operation(Database):
 
 
 
-run = Operation()
-run.start()
+#run = Database()
+#run.admin_logon()
 #run = CratingTable()
 #run.inputdata()

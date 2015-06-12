@@ -1,33 +1,35 @@
 from tkinter  import *
-
+import sys
+from hibase import *
 
 root = Tk()
+base = Database
+base.admin_logon
 
 
 class MenuOptions:                        ### ALL menu vairables
     def Connection(self):
         print("connected")
+
     def Test(self):
         print("dupa1")
 
 
 
 class UserLogin:
-
     def main_login(self):
-        user = StringVar()
-        password = StringVar()
+        usr = StringVar()
+        paswd = StringVar()
 
         Label(root, text="User").pack(side=TOP)
-        self.user = Entry(root, textvariable=user).pack
-        self.user()
+        user = Entry(root, textvariable=usr).pack
+        user()
 
         Label(root, text="Password").pack(side=TOP)
-        self.password = Entry(root, textvariable=password).pack
-        self.password()
-        log_button = Button(root, text=('ENTER'), command=print('sss')).pack
+        password = Entry(root, textvariable=paswd).pack
+        password()
+        log_button = Button(root, text=('ENTER'), command=self.auth).pack
         log_button()
-
 
 
 
@@ -36,7 +38,6 @@ class Menus(UserLogin):
     menu = Menu(root)
     root.config(menu=menu)
     filemenu = Menu(menu)
-
 
     def topmenu(self): #### Rozciagne menu file
 
