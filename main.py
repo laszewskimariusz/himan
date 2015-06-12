@@ -16,9 +16,8 @@ class DatabaseOperation:
         finally:
             if self.con:
                 self.con.close()
-        usr = row[0]
-        paswd = row[1]
-
+#        usr = row[0]
+#        paswd = row[1]
 
 
 
@@ -59,14 +58,14 @@ class Application(Frame, DatabaseOperation):
         bz.admin_logon()
         password = self.password.get()
         user = self.user.get()
-        zip(password, user)
-        content = zip
+        content =(password, user)
         for row in bz.data:
             usr = row[0]
             pswd = row[1]
-            zip(usr, pswd)
+            data =(usr, pswd)
 
-        if content == (zip):
+
+        if content == (data):
             message = ("Dobre haslo")
         else:
             message = ("dupa")
