@@ -4,6 +4,7 @@ from hibase import *
 
 
 class DatabaseOperation:
+
     def admin_logon(self):
 
         try:
@@ -16,14 +17,11 @@ class DatabaseOperation:
         finally:
             if self.con:
                 self.con.close()
-#        usr = row[0]
-#        paswd = row[1]
+
 
 
 
 class Application(Frame, DatabaseOperation):
-
-
 
     def __init__(self, master):
         Frame.__init__(self, master)
@@ -31,40 +29,35 @@ class Application(Frame, DatabaseOperation):
         self.login_widget()
 
     def login_widget(self):
-        self.instruction = Label(self, text = "Password:")
-        self.instruction.grid(row = 0, column = 0, columnspan = 2, sticky = W)
-
-        self.password = Entry(self)
-        self.password.grid(row = 0, column = 1, sticky = W)
-
 
         self.instruction = Label(self, text = "User:")
-        self.instruction.grid(row = 3, column = 0, columnspan = 2, sticky = W)
+        self.instruction.grid(row=0, column=0, columnspan=2, sticky=W)
 
         self.user = Entry(self)
-        self.user.grid(row = 3, column = 1, sticky = W)
+        self.user.grid(row=0, column=1, sticky=W)
 
+        self.instruction = Label(self, text="Password:")
+        self.instruction.grid(row=3, column=0, columnspan=2, sticky=W)
 
+        self.password = Entry(self, show="*")
+        self.password.grid(row=3, column=1, sticky=W)
 
+        self.submit_button = Button(self, text="Submit", command=self.reveal)
+        self.submit_button.grid(row=4, column=1, sticky=W)
 
-        self.submit_button = Button(self, text="Submit", command = self.reveal)
-        self.submit_button.grid(row = 4, column = 1, sticky = W)
-
-        self.text = Text(self, width = 35, height = 5, wrap = WORD)
-        self.text.grid(row = 5, column = 0, columnspan =2, sticky = W)
+        self.text = Text(self, width=35, height=5, wrap=WORD)
+        self.text.grid(row=5, column=0, columnspan=2, sticky=W)
 
     def reveal(self):
         bz = DatabaseOperation()
         bz.admin_logon()
-        password = self.password.get()
         user = self.user.get()
-        content =(password, user)
+        password = self.password.get()
+        content = (user, password)
         for row in bz.data:
             usr = row[0]
             pswd = row[1]
-            data =(usr, pswd)
-
-
+            data = (usr, pswd)
         if content == (data):
             message = ("Dobre haslo")
         else:
