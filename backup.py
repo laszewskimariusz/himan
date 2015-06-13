@@ -58,46 +58,9 @@ class Himan(tk.Tk):
         frame.tkraise()
 
 
-class Himan(tk.Tk):
-
-    def __init__(self, *args, **kwargs):
-
-        tk.Tk.__init__(self, *args, **kwargs)
-
-        tk.Tk.iconbitmap(self, default="icon.ico")
-        tk.Tk.wm_title(self, "HiMan")
-
-        container = tk.Frame(self)
-        container.pack(side="top", fill="both", expand = True)
-        container.grid_rowconfigure(0, weight=1)
-        container.grid_columnconfigure(0, weight=1)
-
-        self.frames = {}
-
-        for F in (StartPage, PageOne, PageTwo):
-
-            frame = F(container, self)
-
-
-            self.frames[F] = frame
-
-            frame.grid(row=0, column=0, sticky="nsew")
-
-        self.show_frame(StartPage)
-
-    def show_frame(self, cont):
-
-        frame = self.frames[cont]
-        frame.tkraise()
-
-
 class StartPage(tk.Frame, DatabaseOperation):
 
 
-
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self,parent)
-        controller = self.controller
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self,parent)
@@ -106,16 +69,20 @@ class StartPage(tk.Frame, DatabaseOperation):
 
         label = tk.Label(self, text="User:", font=SMALL_FONT)
         label.pack(pady=10,padx=10)
-        self.user = ttk.Entry(self, width='15')
-        self.user.pack()
+
+
+        user = ttk.Entry(self, width='15')
+        user.pack()
+
 
         label = tk.Label(self, text="Password:", font=SMALL_FONT)
         label.pack(pady=10,padx=10)
-        self.password = ttk.Entry(self, width='15')
-        self.password.pack()
 
-        button = ttk.Button(self, text="OK", command=lambda: self.reveal(controller))
-        button.pack(pady=10, padx=100)
+        password = ttk.Entry(self, width='15')
+        password.pack()
+
+        button = ttk.Button(self, text="Enter", command=self.reveal)
+        button.pack(pady=10,padx=100)
 
         button2 = ttk.Button(self, text="EXIT",
                             command=lambda: controller.show_frame(PageTwo))
@@ -123,21 +90,26 @@ class StartPage(tk.Frame, DatabaseOperation):
 
 
 
-    def reveal(self, controller):
+    def reveal(self):
         bz = DatabaseOperation()
         bz.admin_logon()
-        user = self.user.get()
-        password = self.password.get()
+
         content = (user, password)
         for row in bz.data:
             usr = row[0]
             pswd = row[1]
             data = (usr, pswd)
         if content == (data):
-            controller.show_frame(PageTwo)
+            print("OK")
 
-        else:
-            print("nie dziala")
+
+
+
+
+
+
+
+
 
 class PageOne(tk.Frame):
 
@@ -153,9 +125,6 @@ class PageOne(tk.Frame):
         button2 = ttk.Button(self, text="Page Two",
                             command=lambda: controller.show_frame(PageTwo))
         button2.pack()
-
-
-
 
 
 class PageTwo(tk.Frame):
