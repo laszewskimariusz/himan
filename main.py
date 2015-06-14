@@ -1,6 +1,7 @@
 import sqlite3 as lite
 import tkinter as tk
 from tkinter import ttk
+import os
 
 
 
@@ -106,6 +107,7 @@ class StartPage(tk.Frame, DatabaseOperation):
 
 class PageOne(tk.Frame):
 
+
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text="Page One!!!", font=LARGE_FONT)
@@ -122,26 +124,38 @@ class PageOne(tk.Frame):
 
 class RootDatabaseEdit(tk.Frame):
 
+    files =[]
+
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text="Page One!!!", font=LARGE_FONT)
-        label.pack(pady=10,padx=10)
+    #    label = tk.Label(self, text="Page One!!!", font=LARGE_FONT)
+    #    label.pack(pady=10,padx=10)
 
 
-       # lbox = tk.Listbox(self, height=10)
-       # lbox.grid(column=0, row=0, padx=5)
-       # s = ttk.Scrollbar(self, orient="vertical", command=lbox.yview)
-       # s.grid(column=1, row=1, sticky=("s","e"))
+        label = tk.Label(self, text = "TESTSTTSTATASDT", font=LARGE_FONT)
+        label.grid(column=0, row=1, sticky=('n','w','e','s'))
 
 
 
-        button1 = ttk.Button(self, text="Back to Home",
-                            command=lambda: controller.show_frame(StartPage))
-        button1.pack()
+        l = tk.Listbox(self, height=5)
+        l.grid(column=4, row=10, sticky=('n','w','e','s'))
+        s = ttk.Scrollbar(self, orient='vertical', command=l.yview)
+        s.grid(column=5, row=10, sticky=('n','s'))
+        l['yscrollcommand'] = s.set
 
-        button2 = ttk.Button(self, text="Page Two",
-                            command=lambda: controller.show_frame(PageOne))
-        button2.pack()
+#        self.grid_columnconfigure(0, weight=1)
+#        self.grid_rowconfigure(0, weight=1)
+ #       for i in range(1,101):
+ #           l.insert('end', 'Line %d of 100' % i)
+
+        for filename in os.listdir(r"dbase/"):
+                l.insert('end', filename)
+                global files
+                self.files.append(filename) ### Change
+
+
+
+
 
 
 
@@ -197,4 +211,3 @@ class EditDatabaseForAdmin(tk.Frame):
 
 app = Himan()
 app.mainloop()
-app.geometry('800x600')
