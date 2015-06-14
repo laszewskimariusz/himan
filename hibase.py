@@ -3,7 +3,7 @@ import sqlite3 as lite
 
 
 class Database:
-#    file_name = input("Enter Database Name:")
+    file_name = input("Enter Database Name:")
 ##### CREATING DATABASE
     def creating_data_base(self):
         if self.file_name is self.file_name:
@@ -54,7 +54,7 @@ class Database:
     def admin_logon(self):
 
         try:
-            con = lite.connect(r"test") ## na potrzeby testu przypisalem baze na sztywno
+            con = lite.connect(test)
             cur = con.cursor()
             cur.execute('SELECT name, password FROM users')
             data = cur.fetchall()
@@ -65,7 +65,7 @@ class Database:
                 con.close()
         usr = row[0]
         paswd = row[1]
-        #print(row[0])
+
 
 class Operation(Database):
 #
